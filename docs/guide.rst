@@ -39,9 +39,9 @@ Mitrhil - это JavaScript MVC-фреймфорк для клиентских �
   </script>
   
   
-.. code-block:: sql
+.. code-block:: javascript
    :linenos:
-  <!doctype html>
+  :<!doctype html>:
   <title>Todo app</title>
   <script src="mithril.min.js"></script>
   <script>
