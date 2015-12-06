@@ -28,7 +28,6 @@ Mitrhil - это JavaScript MVC-фреймфорк для клиентских �
 
 Подгрузив копию Mithril, для начала работы вам требуется минимальный код шаблона:
 
-.. highlight:: js
   `<!doctype html>
   <title>Todo app</title>
   <script src="mithril.min.js"></script>
@@ -37,7 +36,7 @@ Mitrhil - это JavaScript MVC-фреймфорк для клиентских �
   </script>`
   
   
-.. code-block:: js
+.. code-block:: javascript
   :linenos:
   <!doctype html>
   <title>Todo app</title>
