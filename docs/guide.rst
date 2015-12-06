@@ -30,12 +30,12 @@ Mitrhil - это JavaScript MVC-фреймфорк для клиентских �
 
 .. highlight:: javascript
 
-  <!doctype html>
+  `<!doctype html>
   <title>Todo app</title>
   <script src="mithril.min.js"></script>
   <script>
   //app goes here
-  </script>
+  </script>`
   
   
 .. code-block:: js
