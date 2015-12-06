@@ -2,7 +2,7 @@
 Mithril JS Framework
 ====================
 
-#. `Учебник <guide.rst>`_
+#. `Руководство <guide.rst>`_
 
 #. `API <api.rst>`_
 
