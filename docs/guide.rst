@@ -148,10 +148,10 @@ Mitrhil - это JavaScript MVC-фреймворк для клиентских �
             //список выполняющихся задач
             todo.vm.list = new todo.TodoList();
 
-            //поле для хранения названия новой задачи перед ее созданием
+            //поле для хранения описания (названия) новой задачи перед ее созданием
             todo.vm.description = m.prop('');
 
-            //функция добавления задачи к списку, после добавления очищает поле описания для удобства пользователя
+            //функция добавления задачи к списку, после добавления очищает поле description для удобства пользователя
             todo.vm.add = function(description) {
                 if (description()) {
                     todo.vm.list.push(new todo.Todo({description: description()}));
@@ -164,8 +164,31 @@ Mitrhil - это JavaScript MVC-фреймворк для клиентских �
 Код выше опредедяет вид-модель под названием ``vm``. **Это просто объект javascript, который имеет функцию init**. 
 Данная функция иницииализирует объект ``vm`` с тремя полями: 
 
-#. list - свойство, являющееся просто массивом
-#. description - свойство, являющееся функцией ``m.prop`` (геттер-сеттер) с пустой строкой в качестве начального значения 
-#. add - методом добавления нового экземпляра Todo в свойство list в случае, если вводимое название (поле description) не является пустой строкой. 
+#. ``list`` - свойство, являющееся просто массивом;
+#. ``description`` - свойство, являющееся функцией ``m.prop`` (геттер-сеттер) с пустой строкой в качестве начального значения;
+#. ``add`` - метод добавления нового экземпляра Todo в свойство list в случае, если вводимое название (поле description) не является пустой строкой. 
+
+Ниже в этом руководстве мы передадим свойство description в функцию ``add`` в качестве параметра. Когда мы это сделаем, объясним, почему мы передали description как аргумент вместо просто присваивания в ООП-стиле. 
+
+Вы можете использовать вид-модель так:
+
+.. code:: js
+
+    //инициализировать вид-модель
+    todo.vm.init();
+
+    todo.vm.description(); //[empty string]
+
+    //добавим задачу
+    todo.vm.add(todo.vm.description);
+    todo.vm.list.length; //0, потому что вы не можете добавлять задачу без описания
+
+    //добавить описание и потом задачу
+    todo.vm.description("Write code");
+    todo.vm.add(todo.vm.description);
+    todo.vm.list.length; //1
     
-The code above defines a view-model object called vm. It is simply a javascript object that has a init function. This function initializes the vm object with three members: list, which is simply an array, description, which is an m.prop getter-setter function with an empty string as the initial value, and add, which is a method that adds a new Todo instance to list if an input description getter-setter is not an empty string.
+Контроллер
+==========
+
+In classic MVC, the role of the controller is to dispatch actions from the view to the model layer. In traditional server-side frameworks, the controller layer is of large significance because the nature of HTTP requests, responses and the framework abstractions that are exposed to developers require that the controller act as an adapter layer to transform the serialized data from HTTP requests to something that can be passed to ORM model methods.
