@@ -161,6 +161,6 @@ Mitrhil - это JavaScript MVC-фреймворк для клиентских �
         }
     };
 
-Код выше опредедяет вид-модель под названием `vm`. **Это просто объект javascript, который имеет функцию `init`**. 
+Код выше опредедяет вид-модель под названием ``vm``. **Это просто объект javascript, который имеет функцию init**. 
     
 The code above defines a view-model object called vm. It is simply a javascript object that has a init function. This function initializes the vm object with three members: list, which is simply an array, description, which is an m.prop getter-setter function with an empty string as the initial value, and add, which is a method that adds a new Todo instance to list if an input description getter-setter is not an empty string.
