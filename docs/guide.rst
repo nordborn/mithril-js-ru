@@ -296,5 +296,7 @@ Mitrhil - это JavaScript MVC-фреймворк для клиентских �
 ::
 
   m("input", {onchange: m.withAttr("value", todo.vm.description), value: todo.vm.description()})
+  
+ The code bound to the onchange can be read like this: "with the attribute value, set todo.vm.description".
 
 
