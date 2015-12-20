@@ -371,7 +371,7 @@ Hopefully by now, you're starting to see why Mithril encourages the usage of m.p
 
 ::
 
-	//представление
+	//представление (вид)
 	m("table", [
 	    todo.vm.list.map(function(task, index) {
 	        return m("tr", [
@@ -382,5 +382,49 @@ Hopefully by now, you're starting to see why Mithril encourages the usage of m.p
 	        ])
 	    })
 	])
-	
-In the code above, todo.vm.list is an Array, and map is one of its native functional methods. It allows us to iterate over the list and merge transformed versions of the list items into an output array.
+
+В коде выше `todo.vm.list`` - это массив (Array) и метод ``map`` - это один из его встроенных функциональных методов. Он позволяет нам итерировать список и объединять преобразованные вызываемой функцией элементы его списка в результирующий массив. 	
+
+Как видно, мы возвращаем часть шаблона с двумы <td>. Второй из них связвает данные с геттером-сеттером description экземпляра класса Todo.
+
+Возможно, вы уже начали замечать, что JavaScript имеет хорошую поддержку фукнционального программирования, что позволяет нам элегантно делать вещи, реализованными довольно неуклюже в других фрейворках (например, для циклов внутри <dl>/<dt>/<dd>).
+
+----
+
+Оставшаяся часть кода может быть реализована с помощью идиом, которые мы уже использовали. Полное представление может выглядеть так:
+
+::
+
+	todo.view = function() {
+	    return m("html", [
+	        m("body", [
+	            m("input", {onchange: m.withAttr("value", todo.vm.description), value: todo.vm.description()}),
+	            m("button", {onclick: todo.vm.add}, "Add"),
+	            m("table", [
+	                todo.vm.list.map(function(task, index) {
+	                    return m("tr", [
+	                        m("td", [
+	                            m("input[type=checkbox]", {onclick: m.withAttr("checked", task.done), checked: task.done()})
+	                        ]),
+	                        m("td", {style: {textDecoration: task.done() ? "line-through" : "none"}}, task.description()),
+	                    ])
+	                })
+	            ])
+	        ])
+	    ]);
+	};
+
+Вот основные моменты данного шаблона:
+
+* Шаблон отрисован как потомок (неявного в случае, если отсутствует явный) элемента <html> в документе.
+* Поле текстового ввода input сохраняет свое значение в геттер-сеттер ``todo.vm.description``, определенный ранее.
+* Кнопка button вызывает при нажатии метод ``todo.vm.add``.
+* Таблица выводит список всех существующих задач (to-do) в случае, если они имеются.
+* Чекбоксы сохраняют свое значение в геттер-сеттер ``task.done``..
+* Описание (description) задачи становится зачеркнутым с использованием CSS в случае, если задача отмечена как выполненная.
+* После обновления информации перерисовываются только измененные данные, а не весь шаблон. 
+
+----
+
+So far, we've been using m.render to manually redraw after we made a change to the data. However, as I mentioned before, you can enable an auto-redrawing system, by initializing the todo component via m.mount.
+
